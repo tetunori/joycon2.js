@@ -1,0 +1,14 @@
+{
+  "name": "ble-lib-template",
+  "private": true,
+  "workspaces": ["lib", "example"],
+  "scripts": {
+    "build:lib": "cd lib && npm run build",
+    "build:example": "cd example && npm run build",
+    "build": "npm run build:lib && npm run build:example",
+  "lint:lib": "eslint lib/src --ext .ts,.tsx",
+  "lint:example": "eslint example/src --ext .ts,.tsx",
+  "lint": "npm run lint:lib && npm run lint:example",
+    "format": "npm run format:lib && npm run format:example"
+  }
+}

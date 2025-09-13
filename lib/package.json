@@ -1,0 +1,24 @@
+{
+  "name": "ble-lib-template-lib",
+  "version": "0.1.0",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write src"
+  },
+  "devDependencies": {
+    "vite": "latest",
+    "typescript": "latest",
+    "eslint": "latest",
+    "prettier": "latest"
+  }
+}
