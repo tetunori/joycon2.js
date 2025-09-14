@@ -1,39 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Bootstrap 5 CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <title>BLE Peripheral Sample</title>
-</head>
-<body>
-  <div class="container py-3 text-center">
-    <h1 class="mb-4">BLE Peripheral Sample</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>joycon2.js Sample</title>
+    <style>
+      .inner-table {
+        width: 100%;
+        margin-bottom: 0; /* Remove bottom margin of inner table */
+      }
 
-    <div class="mb-3">
-      <button id="ble-connect" class="btn btn-primary">Connect</button>
+      /* Remove bottom border of the last row */
+      table.table tbody tr:last-child td {
+        border-bottom: none !important;
+      }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🎮</text></svg>">
+
+  </head>
+  <body>
+    <div class="container py-3 text-center">
+      <h1 class="mb-4">🎮 joycon2.js Sample 🎮</h1>
+
+      <div class="mb-3">
+        <button id="ble-connect" class="btn btn-primary">Connect</button>
+      </div>
+
+      <!-- Parent table to split left and right -->
+      <table class="tables-container table w-100">
+        <tbody>
+          <tr>
+            <!-- Left column -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                  <tr>
+                    <th class="text-start">Packet ID</th>
+                    <td id="packetId" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Buttons</th>
+                    <td id="buttons" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Left Stick</th>
+                    <td id="leftStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Right Stick</th>
+                    <td id="rightStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse X</th>
+                    <td id="mouseX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Y</th>
+                    <td id="mouseY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Unk</th>
+                    <td id="mouseUnk" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Distance</th>
+                    <td id="mouseDistance" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer X</th>
+                    <td id="magX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer Y</th>
+                    <td id="magY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer Z</th>
+                    <td id="magZ" class="text-center">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+            <!-- Right column -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                  <tr>
+                    <th class="text-start">Battery Voltage</th>
+                    <td id="batteryVoltage" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Battery Current</th>
+                    <td id="batteryCurrent" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Reserved</th>
+                    <td id="reserved" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Temperature</th>
+                    <td id="temperature" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel X</th>
+                    <td id="accelX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel Y</th>
+                    <td id="accelY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel Z</th>
+                    <td id="accelZ" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro X</th>
+                    <td id="gyroX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro Y</th>
+                    <td id="gyroY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro Z</th>
+                    <td id="gyroZ" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Analog Trigger L</th>
+                    <td id="triggerL" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Analog Trigger R</th>
+                    <td id="triggerR" class="text-center">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <table id="dataTable" class="table table-bordered table-striped table-hover w-50 mx-auto">
-      <tbody>
-        <tr>
-          <th class="text-start">Info Type</th>
-          <td id="infoType" class="text-center">-</td>
-        </tr>
-        <tr>
-          <th class="text-start">Standard ID</th>
-          <td id="standardId" class="text-center">-</td>
-        </tr>
-        <tr>
-          <th class="text-start">Angle</th>
-          <td id="angle" class="text-center">-</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <script type="module" src="./src/main.ts"></script>
-</body>
-
+    <script type="module" src="./src/main.ts"></script>
+  </body>
 </html>

@@ -13,9 +13,10 @@
     "ble-lib-template-lib": "file:../lib"
   },
   "devDependencies": {
-    "vite": "latest",
-    "typescript": "latest",
     "eslint": "latest",
-    "prettier": "latest"
+    "prettier": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

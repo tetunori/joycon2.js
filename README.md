@@ -15,3 +15,6 @@ WebBluetoothを使ったBLE Peripheral制御jsライブラリのテンプレー�
 
 ## 公開
 - distフォルダをGitHub Pagesで公開
+
+## Refereces
+[joycon2cpp](https://github.com/TheFrano/joycon2cpp) by [Frano](https://github.com/TheFrano). MIT License 
