@@ -20,8 +20,10 @@
         border-bottom: none !important;
       }
     </style>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🎮</text></svg>">
-
+    <link
+      rel="icon"
+      href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" style="dominant-baseline:central;text-anchor:middle;font-size:90px;">🎮</text></svg>'
+    />
   </head>
   <body>
     <div class="container py-3 text-center">
@@ -31,7 +33,194 @@
         <button id="ble-connect" class="btn btn-primary">Connect</button>
       </div>
 
-      <!-- Parent table to split left and right -->
+      <h3 class="mb-3">Detailed Parsed Data:</h3>
+      <table class="tables-container table w-100">
+        <tbody>
+          <tr>
+            <!-- Buttons column -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                  <tr>
+                    <th class="text-start">L button</th>
+                    <td id="btnL" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">R button</th>
+                    <td id="btnR" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">- button</th>
+                    <td id="btnMinus" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">+ button</th>
+                    <td id="btnPlus" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">L stick button</th>
+                    <td id="btnLStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">R stick button</th>
+                    <td id="btnRStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">A button</th>
+                    <td id="btnA" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">B button</th>
+                    <td id="btnB" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">C button</th>
+                    <td id="btnC" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">X button</th>
+                    <td id="btnX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Y button</th>
+                    <td id="btnY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Up button</th>
+                    <td id="btnUp" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Down button</th>
+                    <td id="btnDown" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Left button</th>
+                    <td id="btnLeft" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Right button</th>
+                    <td id="btnRight" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Capture button</th>
+                    <td id="btnCapture" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Home button</th>
+                    <td id="btnHome" class="text-center">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+            <!-- Packet / Mouse / Magnetometer + Battery -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                  <tr>
+                    <th class="text-start">Packet ID</th>
+                    <td id="detailedPacketId" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Left Stick</th>
+                    <td id="detailedLeftStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Right Stick</th>
+                    <td id="detailedRightStick" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse X</th>
+                    <td id="detailedMouseX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Y</th>
+                    <td id="detailedMouseY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Unk</th>
+                    <td id="detailedMouseUnk" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Mouse Distance</th>
+                    <td id="detailedMouseDistance" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer X</th>
+                    <td id="detailedMagX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer Y</th>
+                    <td id="detailedMagY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Magnetometer Z</th>
+                    <td id="detailedMagZ" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Battery Voltage</th>
+                    <td id="detailedBatteryVoltage" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Battery Current</th>
+                    <td id="detailedBatteryCurrent" class="text-center">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+            <!-- Reserved / Temp / Accel / Gyro / Trigger -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                  <tr>
+                    <th class="text-start">Reserved</th>
+                    <td id="detailedReserved" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Temperature</th>
+                    <td id="detailedTemperature" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel X</th>
+                    <td id="detailedAccelX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel Y</th>
+                    <td id="detailedAccelY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Accel Z</th>
+                    <td id="detailedAccelZ" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro X</th>
+                    <td id="detailedGyroX" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro Y</th>
+                    <td id="detailedGyroY" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Gyro Z</th>
+                    <td id="detailedGyroZ" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Analog Trigger L</th>
+                    <td id="detailedTriggerL" class="text-center">-</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Analog Trigger R</th>
+                    <td id="detailedTriggerR" class="text-center">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="mb-3">Simple Parsed Data:</h3>
       <table class="tables-container table w-100">
         <tbody>
           <tr>
@@ -145,8 +334,13 @@
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <script type="module" src="./src/main.ts"></script>
+      <h3 class="mb-3">Raw Data:</h3>
+      <div class="mb-3">
+        <div id="raw-data">-</div>
+      </div>
+
+      <script type="module" src="./src/main.ts"></script>
+    </div>
   </body>
 </html>
