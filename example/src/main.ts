@@ -19,8 +19,10 @@ interface JoyCon2Data {
   buttonRight: boolean;
   buttonCapture: boolean;
   buttonHome: boolean;
-  leftStick: number;
-  rightStick: number;
+  leftStickX: number;
+  leftStickY: number;
+  rightStickX: number;
+  rightStickY: number;
   mouseX: number;
   mouseY: number;
   mouseUnknown: number;
@@ -63,8 +65,10 @@ const gJoyCon2Data: JoyCon2Data = {
   buttonRight: false,
   buttonCapture: false,
   buttonHome: false,
-  leftStick: 0,
-  rightStick: 0,
+  leftStickX: 0,
+  leftStickY: 0,
+  rightStickX: 0,
+  rightStickY: 0,
   mouseX: 0,
   mouseY: 0,
   mouseUnknown: 0,
@@ -244,8 +248,10 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
       gJoyCon2Data.buttonRight   = (gJoyCon2Data.simpleParsed.buttons & (1 << 14)) !== 0,
       gJoyCon2Data.buttonCapture = (gJoyCon2Data.simpleParsed.buttons & (1 << 15)) !== 0,
       gJoyCon2Data.buttonHome    = (gJoyCon2Data.simpleParsed.buttons & (1 << 16)) !== 0,
-      gJoyCon2Data.leftStick = gJoyCon2Data.simpleParsed.leftStick,
-      gJoyCon2Data.rightStick = gJoyCon2Data.simpleParsed.rightStick,
+      gJoyCon2Data.leftStickX = (gJoyCon2Data.simpleParsed.leftStick >> 12) & 0xFFF,
+      gJoyCon2Data.leftStickY = gJoyCon2Data.simpleParsed.leftStick & 0xFFF,
+      gJoyCon2Data.rightStickX = (gJoyCon2Data.simpleParsed.rightStick >> 12) & 0xFFF,
+      gJoyCon2Data.rightStickY = gJoyCon2Data.simpleParsed.rightStick & 0xFFF,
       gJoyCon2Data.mouseX = gJoyCon2Data.simpleParsed.mouseX,
       gJoyCon2Data.mouseY = gJoyCon2Data.simpleParsed.mouseY,
       gJoyCon2Data.mouseUnknown = gJoyCon2Data.simpleParsed.mouseUnknown,
@@ -254,27 +260,41 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
       gJoyCon2Data.magY = gJoyCon2Data.simpleParsed.magY,
       gJoyCon2Data.magZ = gJoyCon2Data.simpleParsed.magZ,
       gJoyCon2Data.batteryVoltage = gJoyCon2Data.simpleParsed.batteryVoltage,
-      gJoyCon2Data.batteryCurrent = gJoyCon2Data.simpleParsed.batteryCurrent,
+      gJoyCon2Data.batteryCurrent = gJoyCon2Data.simpleParsed.batteryCurrent / 100.0,
       gJoyCon2Data.reserved = gJoyCon2Data.simpleParsed.reserved,
-      gJoyCon2Data.temperature = gJoyCon2Data.simpleParsed.temperature,
-      gJoyCon2Data.accelX = gJoyCon2Data.simpleParsed.accelX,
-      gJoyCon2Data.accelY = gJoyCon2Data.simpleParsed.accelY,
-      gJoyCon2Data.accelZ = gJoyCon2Data.simpleParsed.accelZ,
-      gJoyCon2Data.gyroX = gJoyCon2Data.simpleParsed.gyroX,
-      gJoyCon2Data.gyroY = gJoyCon2Data.simpleParsed.gyroY,
-      gJoyCon2Data.gyroZ = gJoyCon2Data.simpleParsed.gyroZ,
+      gJoyCon2Data.temperature = 25.0 + gJoyCon2Data.simpleParsed.temperature / 127.0,
+      gJoyCon2Data.accelX = gJoyCon2Data.simpleParsed.accelX / 4096.0,
+      gJoyCon2Data.accelY = gJoyCon2Data.simpleParsed.accelY / 4096.0,
+      gJoyCon2Data.accelZ = gJoyCon2Data.simpleParsed.accelZ / 4096.0,
+      gJoyCon2Data.gyroX = gJoyCon2Data.simpleParsed.gyroX / 48000.0 * 360.0,
+      gJoyCon2Data.gyroY = gJoyCon2Data.simpleParsed.gyroY / 48000.0 * 360.0,
+      gJoyCon2Data.gyroZ = gJoyCon2Data.simpleParsed.gyroZ / 48000.0 * 360.0,
       gJoyCon2Data.triggerL = gJoyCon2Data.simpleParsed.triggerL,
       gJoyCon2Data.triggerR = gJoyCon2Data.simpleParsed.triggerR;
       // console.log("SimpleParsedJoyCon2Data Data:", gJoyCon2Data.simpleParsed);
 
-          (Object.keys(gJoyCon2Data) as (keyof JoyCon2Data)[]).forEach((key) => {
+      (Object.keys(gJoyCon2Data) as (keyof JoyCon2Data)[]).forEach((key) => {
         const cell = document.getElementById(key) as HTMLTableCellElement | null;
         if (cell) cell.textContent = gJoyCon2Data[key].toString();
+        if (gJoyCon2Data[key] === true) updateButtonCell(key, true);
+        if (gJoyCon2Data[key] === false) updateButtonCell(key, false);
       });
-
 
     });
   } catch (err) {
     console.error("BLE Connection error", err);
   }
 });
+
+function updateButtonCell(id: string, value: boolean) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.textContent = value ? "ON" : "OFF";
+
+  if (value) {
+    el.classList.add("bg-primary", "text-white"); // trueの時に色付け
+  } else {
+    el.classList.remove("bg-primary", "text-white"); // falseなら元に戻す
+  }
+}
