@@ -221,7 +221,7 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
         triggerR: dv.getUint8(0),
       };
       (Object.keys(gJoyCon2Data.simpleParsed) as (keyof SimpleParsedJoyCon2Data)[]).forEach((key) => {
-        const cell = document.getElementById(key) as HTMLTableCellElement | null;
+        const cell = document.getElementById('smpl-'+key) as HTMLTableCellElement | null;
         if (cell) cell.textContent = gJoyCon2Data.simpleParsed[key].toString();
       });
 
@@ -265,8 +265,14 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
       gJoyCon2Data.gyroZ = gJoyCon2Data.simpleParsed.gyroZ,
       gJoyCon2Data.triggerL = gJoyCon2Data.simpleParsed.triggerL,
       gJoyCon2Data.triggerR = gJoyCon2Data.simpleParsed.triggerR;
-      // デバッグ用
       // console.log("SimpleParsedJoyCon2Data Data:", gJoyCon2Data.simpleParsed);
+
+          (Object.keys(gJoyCon2Data) as (keyof JoyCon2Data)[]).forEach((key) => {
+        const cell = document.getElementById(key) as HTMLTableCellElement | null;
+        if (cell) cell.textContent = gJoyCon2Data[key].toString();
+      });
+
+
     });
   } catch (err) {
     console.error("BLE Connection error", err);
