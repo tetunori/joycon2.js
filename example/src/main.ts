@@ -311,6 +311,9 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
         (gJoyCon2Data.triggerR = gJoyCon2Data.simpleParsed.triggerR));
       // console.log("SimpleParsedJoyCon2Data Data:", gJoyCon2Data.simpleParsed);
 
+      [gJoyCon2Data.rightStickX, gJoyCon2Data.rightStickY] = getStick(gJoyCon2Data.rightStickX, gJoyCon2Data.rightStickY); 
+      [gJoyCon2Data.leftStickX, gJoyCon2Data.leftStickY] = getStick(gJoyCon2Data.leftStickX, gJoyCon2Data.leftStickY); 
+
       (Object.keys(gJoyCon2Data) as (keyof JoyCon2Data)[]).forEach((key) => {
         const cell = document.getElementById(key) as HTMLTableCellElement | null;
         if (cell) cell.textContent = gJoyCon2Data[key].toString();
@@ -342,5 +345,56 @@ function readUint24LE(dv: DataView, offset: number): number {
   const b1 = dv.getUint8(offset + 1);
   const b2 = dv.getUint8(offset + 2);   // 上位バイト
   return (b2 << 16) | (b1 << 8) | b0;   // 24bit 整数
+}
+
+
+// 固定キャリブレーション値（実測で決めたもの）
+const centerX = 2000, minX = 1000, maxX = 3000;
+const centerY = 2000, minY = 1000, maxY = 3000;
+
+/** -1〜1 に正規化（範囲外はクリップ） */
+function normalizeStick(value: number, center: number, min: number, max: number): number {
+  if (value > center) {
+    const norm = (value - center) / (max - center);
+    return Math.min(norm, 1); // クリップ
+  } else {
+    const norm = (value - center) / (center - min);
+    return Math.max(norm, -1); // クリップ
+  }
+}
+
+/** デッドゾーン適用（円形デッドゾーン推奨） */
+function applyDeadzone(x: number, y: number, deadzone: number = 0.15): [number, number] {
+  const magnitude = Math.sqrt(x * x + y * y);
+  if (magnitude < deadzone) return [0, 0];
+
+  // デッドゾーン外を 0〜1 にリマップ
+  const scale = (magnitude - deadzone) / (1 - deadzone);
+  let normX = (x / magnitude) * scale;
+  let normY = (y / magnitude) * scale;
+
+  // 丸め → クリップ
+  normX = clamp(round2(normX), -1, 1);
+  normY = clamp(round2(normY), -1, 1);
+
+  return [normX, normY];
+}
+
+
+/** メイン処理 */
+function getStick(rawX: number, rawY: number): [number, number] {
+  let x = normalizeStick(rawX, centerX, minX, maxX);
+  let y = normalizeStick(rawY, centerY, minY, maxY);
+  return applyDeadzone(x, y, 0.2); // デッドゾーンは15%に設定
+}
+
+/** -1〜1 にクリップ */
+function clamp(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, value));
+}
+
+/** 小数点2桁に丸め */
+function round2(value: number): number {
+  return Math.round(value * 100) / 100;
 }
 
