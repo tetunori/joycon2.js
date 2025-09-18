@@ -38,7 +38,7 @@ interface JoyCon2Data {
   magZ: number;
   batteryVoltage: number;
   batteryCurrent: number;
-  reserved: number;
+  // reserved: number;
   temperature: number;
   accelX: number;
   accelY: number;
@@ -90,7 +90,7 @@ const gJoyCon2Data: JoyCon2Data = {
   magZ: 0,
   batteryVoltage: 0,
   batteryCurrent: 0,
-  reserved: 0,
+  // reserved: 0,
   temperature: 0,
   accelX: 0,
   accelY: 0,
@@ -114,7 +114,7 @@ const gJoyCon2Data: JoyCon2Data = {
     magZ: 0,
     batteryVoltage: 0,
     batteryCurrent: 0,
-    reserved: 0,
+    // reserved: 0,
     temperature: 0,
     accelX: 0,
     accelY: 0,
@@ -142,7 +142,7 @@ interface SimpleParsedJoyCon2Data {
   magZ: number;
   batteryVoltage: number;
   batteryCurrent: number;
-  reserved: number;
+  // reserved: number;
   temperature: number;
   accelX: number;
   accelY: number;
@@ -218,7 +218,7 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
         magZ: dv.getInt16(0x1C, true),
         batteryVoltage: dv.getUint16(0x1F, true),
         batteryCurrent: dv.getInt16(0x28, true),
-        reserved: dv.getUint8(32),
+        // reserved: dv.getUint8(32),
         temperature: dv.getInt16(0x2E, true),
         accelX: dv.getInt16(0x30, true),
         accelY: dv.getInt16(0x32, true),
@@ -228,30 +228,6 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
         gyroZ: dv.getInt16(0x3A, true),
         triggerL: dv.getUint8(0x3C),
         triggerR: dv.getUint8(0x3D),
-
-        // packetId: dv.getUint32(0, true),
-        // buttons: dv.getUint32(0, true),
-        // leftStick: dv.getUint8(0),
-        // rightStick: dv.getUint8(0),
-        // mouseX: dv.getInt16(0, true),
-        // mouseY: dv.getInt16(0, true),
-        // mouseUnknown: dv.getInt16(0, true),
-        // mouseDistance: dv.getInt16(0, true),
-        // magX: dv.getInt16(0, true),
-        // magY: dv.getInt16(0, true),
-        // magZ: dv.getInt16(0, true),
-        // batteryVoltage: dv.getInt16(0, true),
-        // batteryCurrent: dv.getInt16(0, true),
-        // reserved: dv.getUint8(0),
-        // temperature: dv.getInt16(0, true),
-        // accelX: dv.getInt16(0, true),
-        // accelY: dv.getInt16(0, true),
-        // accelZ: dv.getInt16(0, true),
-        // gyroX: dv.getInt16(0, true),
-        // gyroY: dv.getInt16(0, true),
-        // gyroZ: dv.getInt16(0, true),
-        // triggerL: dv.getUint8(0),
-        // triggerR: dv.getUint8(0),
       };
       (Object.keys(gJoyCon2Data.simpleParsed) as (keyof SimpleParsedJoyCon2Data)[]).forEach(
         (key) => {
@@ -299,7 +275,7 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
         (gJoyCon2Data.magZ = gJoyCon2Data.simpleParsed.magZ),
         (gJoyCon2Data.batteryVoltage = gJoyCon2Data.simpleParsed.batteryVoltage),
         (gJoyCon2Data.batteryCurrent = gJoyCon2Data.simpleParsed.batteryCurrent / 100.0),
-        (gJoyCon2Data.reserved = gJoyCon2Data.simpleParsed.reserved),
+        // (gJoyCon2Data.reserved = gJoyCon2Data.simpleParsed.reserved),
         (gJoyCon2Data.temperature = 25.0 + gJoyCon2Data.simpleParsed.temperature / 127.0),
         (gJoyCon2Data.accelX = gJoyCon2Data.simpleParsed.accelX / 4096.0),
         (gJoyCon2Data.accelY = gJoyCon2Data.simpleParsed.accelY / 4096.0),
@@ -313,6 +289,8 @@ document.getElementById("ble-connect")?.addEventListener("click", async () => {
 
       [gJoyCon2Data.rightStickX, gJoyCon2Data.rightStickY] = getStick(gJoyCon2Data.rightStickX, gJoyCon2Data.rightStickY); 
       [gJoyCon2Data.leftStickX, gJoyCon2Data.leftStickY] = getStick(gJoyCon2Data.leftStickX, gJoyCon2Data.leftStickY); 
+      drawStick('leftStickSim', gJoyCon2Data.leftStickX, gJoyCon2Data.leftStickY);
+      drawStick('rightStickSim', gJoyCon2Data.rightStickX, gJoyCon2Data.rightStickY);
 
       (Object.keys(gJoyCon2Data) as (keyof JoyCon2Data)[]).forEach((key) => {
         const cell = document.getElementById(key) as HTMLTableCellElement | null;
@@ -396,5 +374,54 @@ function clamp(value: number, min: number, max: number): number {
 /** 小数点2桁に丸め */
 function round2(value: number): number {
   return Math.round(value * 100) / 100;
+}
+
+function drawStick(canvasId: string, x: number, y: number) {
+  const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const size = canvas.width;
+  const center = size / 2;
+  const outerRadius = size / 2 - 5;
+  const dotRadius = 6;
+
+  // --- クリッピング処理 ---
+  const len = Math.sqrt(x * x + y * y);
+  if (len > 1) {
+    x = x / len;
+    y = y / len;
+  }
+
+  // クリア
+  ctx.clearRect(0, 0, size, size);
+
+  // 外円
+  ctx.beginPath();
+  ctx.arc(center, center, outerRadius, 0, Math.PI * 2);
+  ctx.strokeStyle = "#888";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 十字線
+  ctx.beginPath();
+  ctx.moveTo(center - outerRadius, center);
+  ctx.lineTo(center + outerRadius, center);
+  ctx.moveTo(center, center - outerRadius);
+  ctx.lineTo(center, center + outerRadius);
+  ctx.strokeStyle = "#ccc";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // 値をキャンバス座標に変換
+  const px = center + x * (outerRadius - dotRadius);
+  const py = center - y * (outerRadius - dotRadius);
+
+  // 内側の点
+  ctx.beginPath();
+  ctx.arc(px, py, dotRadius, 0, Math.PI * 2);
+  ctx.fillStyle = "#007bff";
+  ctx.fill();
 }
 

@@ -109,7 +109,15 @@
                     <th class="text-start">Home button</th>
                     <td id="buttonHome" class="text-center">-</td>
                   </tr>
-                  <tr>
+                </tbody>
+              </table>
+            </td>
+
+            <!-- Packet / Mouse / Magnetometer + Battery -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                                    <tr>
                     <th class="text-start">ZR button</th>
                     <td id="buttonZR" class="text-center">-</td>
                   </tr>
@@ -134,14 +142,7 @@
                     <th class="text-start">SL(L) button</th>
                     <td id="buttonSL_L" class="text-center">-</td>
                   </tr>
-                </tbody>
-              </table>
-            </td>
 
-            <!-- Packet / Mouse / Magnetometer + Battery -->
-            <td>
-              <table class="table table-bordered table-striped table-hover inner-table">
-                <tbody>
                   <tr>
                     <th class="text-start">Packet ID</th>
                     <td id="packetId" class="text-center">-</td>
@@ -155,6 +156,12 @@
                     <td id="leftStickY" class="text-center">-</td>
                   </tr>
                   <tr>
+                    <th class="text-start">Left Stick Sim</th>
+                    <td class="text-center">
+                      <canvas id="leftStickSim" width="100" height="100"></canvas>
+                    </td>
+                  </tr>
+                  <tr>
                     <th class="text-start">Right Stick X</th>
                     <td id="rightStickX" class="text-center">-</td>
                   </tr>
@@ -163,6 +170,20 @@
                     <td id="rightStickY" class="text-center">-</td>
                   </tr>
                   <tr>
+                    <th class="text-start">Right Stick Sim</th>
+                    <td class="text-center">
+                      <canvas id="rightStickSim" width="100" height="100"></canvas>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+            <!-- Reserved / Temp / Accel / Gyro / Trigger -->
+            <td>
+              <table class="table table-bordered table-striped table-hover inner-table">
+                <tbody>
+                                    <tr>
                     <th class="text-start">Mouse X</th>
                     <td id="mouseX" class="text-center">-</td>
                   </tr>
@@ -197,18 +218,6 @@
                   <tr>
                     <th class="text-start">Battery Current [mA]</th>
                     <td id="batteryCurrent" class="text-center">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-
-            <!-- Reserved / Temp / Accel / Gyro / Trigger -->
-            <td>
-              <table class="table table-bordered table-striped table-hover inner-table">
-                <tbody>
-                  <tr>
-                    <th class="text-start">Reserved</th>
-                    <td id="reserved" class="text-center">-</td>
                   </tr>
                   <tr>
                     <th class="text-start">Temperature [°C]</th>
