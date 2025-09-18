@@ -385,7 +385,7 @@ function applyDeadzone(x: number, y: number, deadzone: number = 0.15): [number, 
 function getStick(rawX: number, rawY: number): [number, number] {
   let x = normalizeStick(rawX, centerX, minX, maxX);
   let y = normalizeStick(rawY, centerY, minY, maxY);
-  return applyDeadzone(x, y, 0.2); // デッドゾーンは15%に設定
+  return applyDeadzone(x, y, 0.15); // デッドゾーンは15%に設定
 }
 
 /** -1〜1 にクリップ */
