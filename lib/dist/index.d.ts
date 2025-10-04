@@ -1,0 +1,97 @@
+export declare class BlePeripheral {
+}
+export interface SimpleParsedJoyCon2Data {
+    packetId: number;
+    buttons: number;
+    leftStick: number;
+    rightStick: number;
+    mouseX: number;
+    mouseY: number;
+    mouseUnknown: number;
+    mouseDistance: number;
+    magX: number;
+    magY: number;
+    magZ: number;
+    batteryVoltage: number;
+    batteryCurrent: number;
+    temperature: number;
+    accelX: number;
+    accelY: number;
+    accelZ: number;
+    gyroX: number;
+    gyroY: number;
+    gyroZ: number;
+    triggerL: number;
+    triggerR: number;
+}
+export interface JoyCon2Data {
+    packetId: number;
+    buttonL: boolean;
+    buttonR: boolean;
+    buttonMinus: boolean;
+    buttonPlus: boolean;
+    buttonLStick: boolean;
+    buttonRStick: boolean;
+    buttonA: boolean;
+    buttonB: boolean;
+    buttonC: boolean;
+    buttonX: boolean;
+    buttonY: boolean;
+    buttonUp: boolean;
+    buttonDown: boolean;
+    buttonLeft: boolean;
+    buttonRight: boolean;
+    buttonCapture: boolean;
+    buttonHome: boolean;
+    buttonZR: boolean;
+    buttonZL: boolean;
+    buttonSR_R: boolean;
+    buttonSL_R: boolean;
+    buttonSR_L: boolean;
+    buttonSL_L: boolean;
+    leftStickX: number;
+    leftStickY: number;
+    rightStickX: number;
+    rightStickY: number;
+    mouseX: number;
+    mouseY: number;
+    mouseUnknown: number;
+    mouseDistance: number;
+    magX: number;
+    magY: number;
+    magZ: number;
+    batteryVoltage: number;
+    batteryCurrent: number;
+    temperature: number;
+    accelX: number;
+    accelY: number;
+    accelZ: number;
+    gyroX: number;
+    gyroY: number;
+    gyroZ: number;
+    triggerL: number;
+    triggerR: number;
+    simpleParsed: SimpleParsedJoyCon2Data;
+    rawData: Uint8Array;
+}
+export declare const SERVICE_UUID = "ab7de9be-89fe-49ad-828f-118f09df7fd0";
+export declare const CHARACTERISTICS_UUID = "ab7de9be-89fe-49ad-828f-118f09df7fd2";
+export declare class JoyCon2Device extends EventTarget {
+    data: JoyCon2Data;
+    private device;
+    private server;
+    private characteristic;
+    constructor();
+    connect(): Promise<void>;
+    disconnect(): void;
+    onUpdate(cb: (data: JoyCon2Data) => void): void;
+    private handleData;
+}
+export declare class Joycon2 extends EventTarget {
+    private dev;
+    constructor();
+    connect(): Promise<void>;
+    disconnect(): void;
+    get gJoyCon2Data(): JoyCon2Data;
+    onUpdate(cb: (data: JoyCon2Data) => void): void;
+}
