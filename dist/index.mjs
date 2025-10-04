@@ -1,6 +1,3 @@
-class Y {
-  // kept for compatibility; may be extended later
-}
 const m = {
   packetId: 0,
   buttonL: !1,
@@ -169,7 +166,7 @@ class X extends EventTarget {
     }, this.data.packetId = this.data.simpleParsed.packetId, this.data.buttonY = (this.data.simpleParsed.buttons & 1) !== 0, this.data.buttonX = (this.data.simpleParsed.buttons & 2) !== 0, this.data.buttonB = (this.data.simpleParsed.buttons & 4) !== 0, this.data.buttonA = (this.data.simpleParsed.buttons & 8) !== 0, this.data.buttonSR_R = (this.data.simpleParsed.buttons & 16) !== 0, this.data.buttonSL_R = (this.data.simpleParsed.buttons & 32) !== 0, this.data.buttonR = (this.data.simpleParsed.buttons & 64) !== 0, this.data.buttonZR = (this.data.simpleParsed.buttons & 128) !== 0, this.data.buttonMinus = (this.data.simpleParsed.buttons & 256) !== 0, this.data.buttonPlus = (this.data.simpleParsed.buttons & 512) !== 0, this.data.buttonRStick = (this.data.simpleParsed.buttons & 1024) !== 0, this.data.buttonLStick = (this.data.simpleParsed.buttons & 2048) !== 0, this.data.buttonHome = (this.data.simpleParsed.buttons & 4096) !== 0, this.data.buttonCapture = (this.data.simpleParsed.buttons & 8192) !== 0, this.data.buttonC = (this.data.simpleParsed.buttons & 16384) !== 0, this.data.buttonDown = (this.data.simpleParsed.buttons & 65536) !== 0, this.data.buttonUp = (this.data.simpleParsed.buttons & 1 << 17) !== 0, this.data.buttonRight = (this.data.simpleParsed.buttons & 1 << 18) !== 0, this.data.buttonLeft = (this.data.simpleParsed.buttons & 1 << 19) !== 0, this.data.buttonSR_L = (this.data.simpleParsed.buttons & 1 << 20) !== 0, this.data.buttonSL_L = (this.data.simpleParsed.buttons & 1 << 21) !== 0, this.data.buttonL = (this.data.simpleParsed.buttons & 1 << 22) !== 0, this.data.buttonZL = (this.data.simpleParsed.buttons & 1 << 23) !== 0, this.data.leftStickY = this.data.simpleParsed.leftStick >> 12 & 4095, this.data.leftStickX = this.data.simpleParsed.leftStick & 4095, this.data.rightStickY = this.data.simpleParsed.rightStick >> 12 & 4095, this.data.rightStickX = this.data.simpleParsed.rightStick & 4095, this.data.mouseX = this.data.simpleParsed.mouseX, this.data.mouseY = this.data.simpleParsed.mouseY, this.data.mouseUnknown = this.data.simpleParsed.mouseUnknown, this.data.mouseDistance = this.data.simpleParsed.mouseDistance, this.data.magX = this.data.simpleParsed.magX, this.data.magY = this.data.simpleParsed.magY, this.data.magZ = this.data.simpleParsed.magZ, this.data.batteryVoltage = this.data.simpleParsed.batteryVoltage, this.data.batteryCurrent = this.data.simpleParsed.batteryCurrent / 100, this.data.temperature = 25 + this.data.simpleParsed.temperature / 127, this.data.accelX = this.data.simpleParsed.accelX / 4096, this.data.accelY = this.data.simpleParsed.accelY / 4096, this.data.accelZ = this.data.simpleParsed.accelZ / 4096, this.data.gyroX = this.data.simpleParsed.gyroX / 48e3 * 360, this.data.gyroY = this.data.simpleParsed.gyroY / 48e3 * 360, this.data.gyroZ = this.data.simpleParsed.gyroZ / 48e3 * 360, this.data.triggerL = this.data.simpleParsed.triggerL, this.data.triggerR = this.data.simpleParsed.triggerR, [this.data.rightStickX, this.data.rightStickY] = l(this.data.rightStickX, this.data.rightStickY), [this.data.leftStickX, this.data.leftStickY] = l(this.data.leftStickX, this.data.leftStickY), this.dispatchEvent(new CustomEvent("update", { detail: this.data }));
   }
 }
-class v extends EventTarget {
+class Y extends EventTarget {
   constructor() {
     super(), this.dev = new X(), this.dev.addEventListener("update", (t) => this.dispatchEvent(new CustomEvent("update", { detail: t.detail }))), this.dev.addEventListener("connected", (t) => this.dispatchEvent(new CustomEvent("connected"))), this.dev.addEventListener("disconnected", (t) => this.dispatchEvent(new CustomEvent("disconnected"))), this.dev.addEventListener("error", (t) => this.dispatchEvent(new CustomEvent("error", { detail: t.detail })));
   }
@@ -187,10 +184,9 @@ class v extends EventTarget {
   }
 }
 export {
-  Y as BlePeripheral,
   g as CHARACTERISTICS_UUID,
   X as JoyCon2Device,
-  v as Joycon2,
+  Y as Joycon2,
   d as SERVICE_UUID
 };
 //# sourceMappingURL=index.mjs.map

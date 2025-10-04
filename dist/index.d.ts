@@ -1,5 +1,3 @@
-export declare class BlePeripheral {
-}
 export interface SimpleParsedJoyCon2Data {
     packetId: number;
     buttons: number;

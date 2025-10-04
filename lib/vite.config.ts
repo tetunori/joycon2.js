@@ -9,7 +9,8 @@ export default defineConfig({
       fileName: 'index',
       formats: ['es', 'umd']
     },
-    outDir: 'dist',
+  // output to repository root `dist` so artifacts live at /dist
+  outDir: '../dist',
     sourcemap: true
   },
   plugins: [tsconfigPaths()]

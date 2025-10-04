@@ -1,10 +1,4 @@
 /// <reference lib="dom" />
-// WebBluetooth BLE Peripheral + JoyCon2 wrapper
-// The library exposes a Joycon2 class (default export) which handles BLE
-// connect/disconnect and parses incoming JoyCon2 packets into a `gJoyCon2Data`
-// object that matches the shape used by the sample app.
-export class BlePeripheral {
-}
 const DEFAULT_DATA = {
     packetId: 0,
     buttonL: false,
