@@ -1,9 +1,9 @@
 {
   "name": "joycon2.js",
   "version": "0.1.0",
-  "main": "../dist/index.mjs",
-  "module": "../dist/index.mjs",
-  "types": "../dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs"
