@@ -10,7 +10,7 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "ble-lib-template-lib": "file:../lib"
+    "joycon2.js": "file:../lib"
   },
   "devDependencies": {
     "eslint": "latest",

@@ -1,23 +1,25 @@
 {
-  "name": "ble-lib-template-lib",
+  "name": "joycon2.js",
   "version": "0.1.0",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.umd.js"
+      "import": "./dist/index.mjs"
     }
   },
   "scripts": {
     "build": "vite build",
+    "build:types": "tsc -p tsconfig.json",
+    "build:with-types": "npm run build && npm run build:types",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write src"
   },
   "devDependencies": {
     "vite": "latest",
     "typescript": "latest",
+    "@types/web-bluetooth": "^0.0.51",
     "eslint": "latest",
     "prettier": "latest"
   }
