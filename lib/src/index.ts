@@ -367,6 +367,24 @@ export class Joycon2 extends EventTarget {
     return this.dev.data;
   }
 
+  // Convenience boolean getters for common buttons so consumers can read
+  // `jc2.buttonUp` directly (useful for sketches / globals).
+  get buttonUp(): boolean {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonUp);
+  }
+
+  get buttonDown(): boolean {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonDown);
+  }
+
+  get buttonLeft(): boolean {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonLeft);
+  }
+
+  get buttonRight(): boolean {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonRight);
+  }
+
   onUpdate(cb: (data: JoyCon2Data) => void) {
     this.addEventListener('update', () => cb(this.gJoyCon2Data));
   }

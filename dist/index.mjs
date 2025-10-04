@@ -75,7 +75,7 @@ function o(e, t) {
   const a = e.getUint8(t), s = e.getUint8(t + 1);
   return e.getUint8(t + 2) << 16 | s << 8 | a;
 }
-const b = 2e3, p = 1e3, f = 3e3, P = 2e3, S = 1e3, k = 3e3;
+const b = 2e3, p = 1e3, f = 3e3, P = 2e3, v = 1e3, S = 3e3;
 function h(e, t, a, s) {
   if (e > t) {
     const i = (e - t) / (s - t);
@@ -85,24 +85,24 @@ function h(e, t, a, s) {
     return Math.max(i, -1);
   }
 }
-function c(e, t, a) {
+function u(e, t, a) {
   return Math.max(t, Math.min(a, e));
 }
-function u(e) {
+function c(e) {
   return Math.round(e * 100) / 100;
 }
-function y(e, t, a = 0.15) {
+function k(e, t, a = 0.15) {
   const s = Math.sqrt(e * e + t * t);
   if (s < a) return [0, 0];
   const i = (s - a) / (1 - a);
   let n = e / s * i, r = t / s * i;
-  return n = c(u(n), -1, 1), r = c(u(r), -1, 1), [n, r];
+  return n = u(c(n), -1, 1), r = u(c(r), -1, 1), [n, r];
 }
 function l(e, t) {
-  let a = h(e, b, p, f), s = h(t, P, S, k);
-  return y(a, s, 0.15);
+  let a = h(e, b, p, f), s = h(t, P, v, S);
+  return k(a, s, 0.15);
 }
-class X extends EventTarget {
+class y extends EventTarget {
   constructor() {
     super(), this.data = { ...m }, this.device = null, this.server = null, this.characteristic = null;
   }
@@ -166,9 +166,9 @@ class X extends EventTarget {
     }, this.data.packetId = this.data.simpleParsed.packetId, this.data.buttonY = (this.data.simpleParsed.buttons & 1) !== 0, this.data.buttonX = (this.data.simpleParsed.buttons & 2) !== 0, this.data.buttonB = (this.data.simpleParsed.buttons & 4) !== 0, this.data.buttonA = (this.data.simpleParsed.buttons & 8) !== 0, this.data.buttonSR_R = (this.data.simpleParsed.buttons & 16) !== 0, this.data.buttonSL_R = (this.data.simpleParsed.buttons & 32) !== 0, this.data.buttonR = (this.data.simpleParsed.buttons & 64) !== 0, this.data.buttonZR = (this.data.simpleParsed.buttons & 128) !== 0, this.data.buttonMinus = (this.data.simpleParsed.buttons & 256) !== 0, this.data.buttonPlus = (this.data.simpleParsed.buttons & 512) !== 0, this.data.buttonRStick = (this.data.simpleParsed.buttons & 1024) !== 0, this.data.buttonLStick = (this.data.simpleParsed.buttons & 2048) !== 0, this.data.buttonHome = (this.data.simpleParsed.buttons & 4096) !== 0, this.data.buttonCapture = (this.data.simpleParsed.buttons & 8192) !== 0, this.data.buttonC = (this.data.simpleParsed.buttons & 16384) !== 0, this.data.buttonDown = (this.data.simpleParsed.buttons & 65536) !== 0, this.data.buttonUp = (this.data.simpleParsed.buttons & 1 << 17) !== 0, this.data.buttonRight = (this.data.simpleParsed.buttons & 1 << 18) !== 0, this.data.buttonLeft = (this.data.simpleParsed.buttons & 1 << 19) !== 0, this.data.buttonSR_L = (this.data.simpleParsed.buttons & 1 << 20) !== 0, this.data.buttonSL_L = (this.data.simpleParsed.buttons & 1 << 21) !== 0, this.data.buttonL = (this.data.simpleParsed.buttons & 1 << 22) !== 0, this.data.buttonZL = (this.data.simpleParsed.buttons & 1 << 23) !== 0, this.data.leftStickY = this.data.simpleParsed.leftStick >> 12 & 4095, this.data.leftStickX = this.data.simpleParsed.leftStick & 4095, this.data.rightStickY = this.data.simpleParsed.rightStick >> 12 & 4095, this.data.rightStickX = this.data.simpleParsed.rightStick & 4095, this.data.mouseX = this.data.simpleParsed.mouseX, this.data.mouseY = this.data.simpleParsed.mouseY, this.data.mouseUnknown = this.data.simpleParsed.mouseUnknown, this.data.mouseDistance = this.data.simpleParsed.mouseDistance, this.data.magX = this.data.simpleParsed.magX, this.data.magY = this.data.simpleParsed.magY, this.data.magZ = this.data.simpleParsed.magZ, this.data.batteryVoltage = this.data.simpleParsed.batteryVoltage, this.data.batteryCurrent = this.data.simpleParsed.batteryCurrent / 100, this.data.temperature = 25 + this.data.simpleParsed.temperature / 127, this.data.accelX = this.data.simpleParsed.accelX / 4096, this.data.accelY = this.data.simpleParsed.accelY / 4096, this.data.accelZ = this.data.simpleParsed.accelZ / 4096, this.data.gyroX = this.data.simpleParsed.gyroX / 48e3 * 360, this.data.gyroY = this.data.simpleParsed.gyroY / 48e3 * 360, this.data.gyroZ = this.data.simpleParsed.gyroZ / 48e3 * 360, this.data.triggerL = this.data.simpleParsed.triggerL, this.data.triggerR = this.data.simpleParsed.triggerR, [this.data.rightStickX, this.data.rightStickY] = l(this.data.rightStickX, this.data.rightStickY), [this.data.leftStickX, this.data.leftStickY] = l(this.data.leftStickX, this.data.leftStickY), this.dispatchEvent(new CustomEvent("update", { detail: this.data }));
   }
 }
-class Y extends EventTarget {
+class X extends EventTarget {
   constructor() {
-    super(), this.dev = new X(), this.dev.addEventListener("update", (t) => this.dispatchEvent(new CustomEvent("update", { detail: t.detail }))), this.dev.addEventListener("connected", (t) => this.dispatchEvent(new CustomEvent("connected"))), this.dev.addEventListener("disconnected", (t) => this.dispatchEvent(new CustomEvent("disconnected"))), this.dev.addEventListener("error", (t) => this.dispatchEvent(new CustomEvent("error", { detail: t.detail })));
+    super(), this.dev = new y(), this.dev.addEventListener("update", (t) => this.dispatchEvent(new CustomEvent("update", { detail: t.detail }))), this.dev.addEventListener("connected", (t) => this.dispatchEvent(new CustomEvent("connected"))), this.dev.addEventListener("disconnected", (t) => this.dispatchEvent(new CustomEvent("disconnected"))), this.dev.addEventListener("error", (t) => this.dispatchEvent(new CustomEvent("error", { detail: t.detail })));
   }
   async connect() {
     return this.dev.connect();
@@ -179,14 +179,28 @@ class Y extends EventTarget {
   get gJoyCon2Data() {
     return this.dev.data;
   }
+  // Convenience boolean getters for common buttons so consumers can read
+  // `jc2.buttonUp` directly (useful for sketches / globals).
+  get buttonUp() {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonUp);
+  }
+  get buttonDown() {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonDown);
+  }
+  get buttonLeft() {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonLeft);
+  }
+  get buttonRight() {
+    return !!(this.dev && this.dev.data && this.dev.data.buttonRight);
+  }
   onUpdate(t) {
     this.addEventListener("update", () => t(this.gJoyCon2Data));
   }
 }
 export {
   g as CHARACTERISTICS_UUID,
-  X as JoyCon2Device,
-  Y as Joycon2,
+  y as JoyCon2Device,
+  X as Joycon2,
   d as SERVICE_UUID
 };
 //# sourceMappingURL=index.mjs.map

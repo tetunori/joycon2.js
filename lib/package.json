@@ -19,7 +19,6 @@
   "devDependencies": {
     "vite": "latest",
     "typescript": "latest",
-    "@types/web-bluetooth": "^0.0.51",
     "eslint": "latest",
     "prettier": "latest"
   }

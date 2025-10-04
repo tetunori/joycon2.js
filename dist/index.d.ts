@@ -91,5 +91,9 @@ export declare class Joycon2 extends EventTarget {
     connect(): Promise<void>;
     disconnect(): void;
     get gJoyCon2Data(): JoyCon2Data;
+    get buttonUp(): boolean;
+    get buttonDown(): boolean;
+    get buttonLeft(): boolean;
+    get buttonRight(): boolean;
     onUpdate(cb: (data: JoyCon2Data) => void): void;
 }

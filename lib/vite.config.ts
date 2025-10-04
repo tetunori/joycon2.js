@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      name: 'BleLibTemplate',
+      name: 'JoyCon2',
       fileName: 'index',
       formats: ['es', 'umd']
     },
