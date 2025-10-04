@@ -1,116 +1,78 @@
 import { Joycon2 } from "joycon2.js";
 
-interface JoyCon2Data {
-  packetId: number;
-  buttonL: boolean;
-  buttonR: boolean;
-  buttonMinus: boolean;
-  buttonPlus: boolean;
-  buttonLStick: boolean;
-  buttonRStick: boolean;
-  buttonA: boolean;
-  buttonB: boolean;
-  buttonC: boolean;
-  buttonX: boolean;
-  buttonY: boolean;
-  buttonUp: boolean;
-  buttonDown: boolean;
-  buttonLeft: boolean;
-  buttonRight: boolean;
-  buttonCapture: boolean;
-  buttonHome: boolean;
-  buttonZR: boolean,
-  buttonZL: boolean,
-  buttonSR_R: boolean,
-  buttonSL_R: boolean,
-  buttonSR_L: boolean,
-  buttonSL_L: boolean,
-  leftStickX: number;
-  leftStickY: number;
-  rightStickX: number;
-  rightStickY: number;
-  mouseX: number;
-  mouseY: number;
-  mouseUnknown: number;
-  mouseDistance: number;
-  magX: number;
-  magY: number;
-  magZ: number;
-  batteryVoltage: number;
-  batteryCurrent: number;
-  // reserved: number;
-  temperature: number;
-  accelX: number;
-  accelY: number;
-  accelZ: number;
-  gyroX: number;
-  gyroY: number;
-  gyroZ: number;
-  triggerL: number;
-  triggerR: number;
-  simpleParsed: SimpleParsedJoyCon2Data;
-  rawData: Uint8Array;
-}
-
-interface SimpleParsedJoyCon2Data {
-  packetId: number;
-  buttons: number;
-  leftStick: number;
-  rightStick: number;
-  mouseX: number;
-  mouseY: number;
-  mouseUnknown: number;
-  mouseDistance: number;
-  magX: number;
-  magY: number;
-  magZ: number;
-  batteryVoltage: number;
-  batteryCurrent: number;
-  // reserved: number;
-  temperature: number;
-  accelX: number;
-  accelY: number;
-  accelZ: number;
-  gyroX: number;
-  gyroY: number;
-  gyroZ: number;
-  triggerL: number;
-  triggerR: number;
-}
+// Note: type definitions for JoyCon2 data live in the library. The example UI
+// no longer declares local interfaces and instead treats incoming data
+// generically for display purposes.
 
 const joy = new Joycon2();
 
-document.getElementById("ble-connect")?.addEventListener("click", async () => {
+const bleButton = document.getElementById('ble-connect') as HTMLButtonElement | null;
+let isConnected = false;
+
+function updateBleButton(connected: boolean) {
+  if (!bleButton) return;
+  isConnected = connected;
+  bleButton.textContent = connected ? 'Disconnect' : 'Connect';
+  // switch between Bootstrap primary (blue) and danger (red)
+  bleButton.classList.remove('btn-primary', 'btn-danger');
+  bleButton.classList.add(connected ? 'btn-danger' : 'btn-primary');
+  bleButton.disabled = false;
+}
+
+bleButton?.addEventListener('click', async () => {
+  if (!bleButton) return;
+  if (isConnected) {
+    // user requested disconnect
+    try {
+      joy.disconnect();
+    } catch (err) {
+      console.error('disconnect error', err);
+    }
+    return;
+  }
+
+  // connect flow
+  bleButton.disabled = true;
   try {
     await joy.connect();
-    console.log('connected');
+    // 'connected' event will update UI
   } catch (err) {
     console.error('connect error', err);
+    bleButton.disabled = false;
   }
 });
 
-joy.addEventListener('update', (e) => {
-  const data = (e as CustomEvent).detail;
+joy.addEventListener('connected', () => updateBleButton(true));
+joy.addEventListener('disconnected', () => updateBleButton(false));
+joy.addEventListener('error', (e: Event) => {
+  console.error('joy error', (e as CustomEvent).detail);
+  updateBleButton(false);
+});
+
+joy.addEventListener('update', (e: Event) => {
+  const data = ((e as CustomEvent).detail) as any;
 
   // reflect into the same UI as before
   document.getElementById("raw-data")!.textContent = Array.from(data.rawData as Uint8Array)
     .map((b: number) => b.toString(16).padStart(2, "0"))
     .join(" ");
 
-  (Object.keys(data.simpleParsed) as (keyof SimpleParsedJoyCon2Data)[]).forEach((key) => {
-    const cell = document.getElementById("smpl-" + key) as HTMLTableCellElement | null;
-    if (cell) cell.textContent = (data.simpleParsed[key]).toString();
-  });
+  if (data.simpleParsed && typeof data.simpleParsed === 'object') {
+    Object.entries(data.simpleParsed).forEach(([key, val]) => {
+      const cell = document.getElementById('smpl-' + key) as HTMLTableCellElement | null;
+      if (cell) cell.textContent = String(val);
+    });
+  }
 
   // library already provides normalized stick values (-1..1), so use them directly
   drawStick('leftStickSim', data.leftStickX, data.leftStickY);
   drawStick('rightStickSim', data.rightStickX, data.rightStickY);
 
-  (Object.keys(data) as (keyof JoyCon2Data)[]).forEach((key) => {
+  Object.entries(data).forEach(([key, val]) => {
     const cell = document.getElementById(key) as HTMLTableCellElement | null;
-    if (cell) cell.textContent = (data as any)[key].toString();
-    if ((data as any)[key] === true) updateButtonCell(key as string, true);
-    if ((data as any)[key] === false) updateButtonCell(key as string, false);
+    if (cell) cell.textContent = String(val);
+    if (val === true) updateButtonCell(key, true);
+    if (val === false) updateButtonCell(key, false);
   });
 });
 

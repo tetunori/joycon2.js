@@ -5,10 +5,6 @@
 // connect/disconnect and parses incoming JoyCon2 packets into a `gJoyCon2Data`
 // object that matches the shape used by the sample app.
 
-export class BlePeripheral {
-  // kept for compatibility; may be extended later
-}
-
 export interface SimpleParsedJoyCon2Data {
   packetId: number;
   buttons: number;
