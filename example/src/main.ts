@@ -4,7 +4,7 @@ import { Joycon2 } from "joycon2.js";
 // no longer declares local interfaces and instead treats incoming data
 // generically for display purposes.
 
-const joy = new Joycon2();
+const jc2 = new Joycon2();
 
 const bleButton = document.getElementById('ble-connect') as HTMLButtonElement | null;
 let isConnected = false;
@@ -24,7 +24,7 @@ bleButton?.addEventListener('click', async () => {
   if (isConnected) {
     // user requested disconnect
     try {
-      joy.disconnect();
+      jc2.disconnect();
     } catch (err) {
       console.error('disconnect error', err);
     }
@@ -34,7 +34,7 @@ bleButton?.addEventListener('click', async () => {
   // connect flow
   bleButton.disabled = true;
   try {
-    await joy.connect();
+    await jc2.connect();
     // 'connected' event will update UI
   } catch (err) {
     console.error('connect error', err);
@@ -42,14 +42,14 @@ bleButton?.addEventListener('click', async () => {
   }
 });
 
-joy.addEventListener('connected', () => updateBleButton(true));
-joy.addEventListener('disconnected', () => updateBleButton(false));
-joy.addEventListener('error', (e: Event) => {
-  console.error('joy error', (e as CustomEvent).detail);
+jc2.addEventListener('connected', () => updateBleButton(true));
+jc2.addEventListener('disconnected', () => updateBleButton(false));
+jc2.addEventListener('error', (e: Event) => {
+  console.error('JoyCon2 error', (e as CustomEvent).detail);
   updateBleButton(false);
 });
 
-joy.addEventListener('update', (e: Event) => {
+jc2.addEventListener('update', (e: Event) => {
   const data = ((e as CustomEvent).detail) as any;
 
   // reflect into the same UI as before
@@ -89,16 +89,6 @@ function updateButtonCell(id: string, value: boolean) {
     el.classList.remove("bg-primary", "text-white"); // falseなら元に戻す
   }
 }
-
-
-
-function readUint24LE(dv: DataView, offset: number): number {
-  const b0 = dv.getUint8(offset);       // 下位バイト
-  const b1 = dv.getUint8(offset + 1);
-  const b2 = dv.getUint8(offset + 2);   // 上位バイト
-  return (b2 << 16) | (b1 << 8) | b0;   // 24bit 整数
-}
-
 
 // Helper functions for rendering are provided below. Stick normalization and parsing
 // are handled inside the library; the example only draws the provided normalized
