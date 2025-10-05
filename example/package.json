@@ -1,5 +1,5 @@
 {
-  "name": "ble-lib-template-example",
+  "name": "joycon2-sample",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,12 +10,13 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "ble-lib-template-lib": "file:../lib"
+    "joycon2.js": "file:../dist"
   },
   "devDependencies": {
-    "vite": "latest",
-    "typescript": "latest",
     "eslint": "latest",
-    "prettier": "latest"
+    "prettier": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

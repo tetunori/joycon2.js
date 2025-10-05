@@ -1,19 +1,20 @@
 {
-  "name": "ble-lib-template-lib",
+  "name": "joycon2.js",
   "version": "0.1.0",
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/joycon2.mjs",
+  "module": "./dist/joycon2.mjs",
+  "types": "./dist/joycon2.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.umd.js"
+      "import": "./dist/joycon2.mjs"
     }
   },
   "scripts": {
-    "build": "vite build",
-    "lint": "eslint src --ext .ts,.tsx",
-    "format": "prettier --write src"
+    "build": "vite build --config vite.config.ts && vite build --config vite.config.ts",
+    "build:types": "tsc -p tsconfig.json",
+    "build:with-types": "npm run build && npm run build:types && echo 'lib build complete'",
+    "format": "prettier --write src",
+    "lib-build": "npm run format && npm run build:with-types && echo 'Library build complete'"
   },
   "devDependencies": {
     "vite": "latest",
