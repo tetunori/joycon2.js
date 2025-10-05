@@ -7,7 +7,7 @@ Version 0.7.0
 
 A monorepo containing an **UNOFFICIAL** JavaScript library for controlling `Joy-Con 2` using WebBluetooth, along with samples using Vite-based SPA WebApp and p5.js.
 
-## Samples
+## Samples🔰
 
 - [p5.js demo](https://tetunori.github.io/joycon2.js/sample/)
   - Click to connect. Then, press X/Up button to confirm after connected.
@@ -55,7 +55,7 @@ Click to connect. Then, press X/Up button to confirm after connected.
 See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/main/example/).
 
 
-## APIs Specification
+## APIs Specification👨‍💻
 <details><summary>CLICK ME</summary>
 
 ### API List
@@ -183,7 +183,7 @@ if (jc2.buttonUp || jc2.buttonX) {
 </details>
 
 
-## Notes
+## Notes📋
 ### Environment 
 Due to the dependency to `WebBluetooth`, this library works with the following environment.  
 - OS: Windows, macOS, Android. **iOS/iPadOS does not support**(Please use [Bluefy](https://apps.apple.com/jp/app/bluefy-web-ble-browser/id1492822055) app instead). 
@@ -192,7 +192,7 @@ Due to the dependency to `WebBluetooth`, this library works with the following e
 You can check & use immediately via **[p5.js demo](https://tetunori.github.io/joycon2.js/sample/)**.
 
 
-## Maintenance
+## Maintenance🛠️
 ### Development Environment
 - TypeScript
 - Vite
