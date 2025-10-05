@@ -58,7 +58,7 @@ See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/ma
 ## APIs Specification
 <details><summary>CLICK ME</summary>
 
-## API List
+### API List
 
 - [Constructor](#Constructor)
 - [Methods](#Methods)
@@ -71,7 +71,7 @@ new JoyCon2()
 
 Parameters: None  
   
-Returns: joycon2.js instance  
+Return: joycon2.js instance  
 
 ### Methods
 #### connect
@@ -86,7 +86,7 @@ Type: `async`
   
 Parameters: None  
   
-Returns: `Promise<void>`  
+Return: `Promise<void>`  
 
 Notes:  
 Connection success or failure can be captured using then/catch methods.
@@ -113,12 +113,12 @@ Type: `sync`
   
 Parameters: None  
   
-Returns: None  
+Return: None  
  
 
 ### Properties
 Overview:  
-You can access current key/button status.
+You can access current input status.
 ```javascript
 // Consider `jc2` to be connected joycon2.js instance
 if (jc2.buttonUp || jc2.buttonX) {
