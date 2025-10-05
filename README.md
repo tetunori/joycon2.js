@@ -12,23 +12,22 @@ A monorepo containing an **UNOFFICIAL** JavaScript library for controlling `Joy-
 - [p5.js demo](https://tetunori.github.io/joycon2.js/sample/)
   - Click to connect. Then, press X/Up button to confirm after connected.
 - [SPA WebApp demo](https://tetunori.github.io/joycon2.js/example/dist/)  
-<img src="./images/webapp.png" width="640px"/>
+  - <img src="./images/webapp.png" width="640px"/>
 
 ## How to use🪄
 
-### web usage
+### A. web usage
 
-#### Import library into HTML file
+#### 1. Import library into HTML file
 Just insert a sigle script in your `<head>`.  
 ```html 
-<script src="https://tetunori.github.io/joycon2.js/dist/joycon2.js"></script>
+<script src="https://tetunori.github.io/joycon2.js/dist/v0.7.0/joycon2.js"></script>
 ```
 
-#### Use this in your .js code
+#### 2. Use this in your .js code
 Call `JoyCon2()` to create an instance to access all functions.  
 Then call `connect` API via received instance as below.
-> [!WARNING]
-> This library depends on `WebBluetooth` so that this API must be called in a user-action function like `mouseClicked()` or `keyPressed()` etc.
+
 
 ```javascript
 const jc2 = new JoyCon2();  // Get an instance
@@ -38,6 +37,8 @@ function mouseClicked() {
   jc2.connect().then(() => console.log("JoyCon2 Connected"));
 }
 ```
+> [!WARNING]
+> This library depends on `WebBluetooth` so that this API must be called in a user-action function like `mouseClicked()` or `keyPressed()` etc.
 
 Then, you can access full functions after connected.
 ```javascript
@@ -45,12 +46,12 @@ if (jc2.buttonUp || jc2.buttonX) {
   // some button procedures...
 }
 ```
-- **[OpenProcessing Sample: Turn Light On](https://openprocessing.org/sketch/1716380)**
+- **[OpenProcessing Sample: joycon2.js sample](https://openprocessing.org/sketch/1716380)**
 - **[p5.js demo](https://tetunori.github.io/joycon2.js/sample/)**
 Click to connect. Then, press X/Up button to confirm after connected.
 
 
-### Node.js usage
+### B. Node.js usage
 See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/main/example/).
 
 
@@ -237,7 +238,7 @@ Tetsunori Nakayama
 - [joycon2cpp](https://github.com/TheFrano/joycon2cpp) by [Frano](https://github.com/TheFrano). MIT License
 - [p5.js](https://github.com/processing/p5.js) by [Processing Foundation](https://github.com/processing). GNU Lesser General Public License v2.1.
 
-## Warning⚠️
+## Warning🚨
 
 - This library is published UNOFFICIALLY, is nothing to do with the official activities and also gives any guarantees for any usage.  
 - "Joy-Con 2" is a registered trademark of Nintendo Co., Ltd.
