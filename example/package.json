@@ -10,7 +10,7 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "joycon2.js": "file:../lib"
+    "joycon2.js": "file:../dist"
   },
   "devDependencies": {
     "eslint": "latest",

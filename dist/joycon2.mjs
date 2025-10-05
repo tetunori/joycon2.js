@@ -203,4 +203,4 @@ export {
   X as Joycon2,
   d as SERVICE_UUID
 };
-//# sourceMappingURL=index.mjs.map
+//# sourceMappingURL=joycon2.mjs.map

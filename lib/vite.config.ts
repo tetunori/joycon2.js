@@ -4,9 +4,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/index.ts',
+      entry: 'src/joycon2.ts',
       name: 'JoyCon2',
-      fileName: 'index',
+      fileName: 'joycon2',
       formats: ['es', 'umd']
     },
     // output to repository root `dist` so artifacts live at /dist

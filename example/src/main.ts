@@ -1,4 +1,4 @@
-import { Joycon2 } from "joycon2.js";
+import { Joycon2 } from "../../dist/joycon2.js";
 
 // Note: type definitions for JoyCon2 data live in the library. The example UI
 // no longer declares local interfaces and instead treats incoming data
