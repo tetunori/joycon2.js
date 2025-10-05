@@ -8,6 +8,7 @@
     "build": "npm run build:lib && npm run build:example",
     "lint:lib": "eslint lib/src --ext .ts,.tsx",
     "lint:example": "eslint example/src --ext .ts,.tsx",
+    "dev:example": "cd example && npm run dev",
     "lint": "npm run lint:lib && npm run lint:example",
     "format": "npm run format:lib && npm run format:example"
   }
