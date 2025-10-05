@@ -7,9 +7,9 @@ Version 0.7.0
 
 A monorepo containing an **UNOFFICIAL** JavaScript library for controlling `Joy-Con 2` using WebBluetooth, along with samples using Vite-based SPA WebApp and p5.js.
 
-## Samples
+## Samples🔰
 
-- [p5.js demo](https://tetunori.github.io/joycon2.js/sample/)
+- [p5.js demo](https://tetunori.github.io/joycon2.js/example-p5js/)
   - Click to connect. Then, press X/Up button to confirm after connected.
 - [SPA WebApp demo](https://tetunori.github.io/joycon2.js/example/dist/)  
   - <img src="./images/webapp.png" width="640px"/>
@@ -21,7 +21,7 @@ A monorepo containing an **UNOFFICIAL** JavaScript library for controlling `Joy-
 #### 1. Import library into HTML file
 Just insert a sigle script in your `<head>`.  
 ```html 
-<script src="https://tetunori.github.io/joycon2.js/dist/v0.7.0/joycon2.js"></script>
+<script src="https://tetunori.github.io/joycon2.js/dist/v0.7.0/joycon2.umd.js"></script>
 ```
 
 #### 2. Use this in your .js code
@@ -46,19 +46,19 @@ if (jc2.buttonUp || jc2.buttonX) {
   // some button procedures...
 }
 ```
-- **[OpenProcessing Sample: joycon2.js sample](https://openprocessing.org/sketch/1716380)**
-- **[p5.js demo](https://tetunori.github.io/joycon2.js/sample/)**
-Click to connect. Then, press X/Up button to confirm after connected.
+- **[OpenProcessing Sample: joycon2.js sample](https://openprocessing.org/sketch/2745664)**
+- **[p5.js demo](https://tetunori.github.io/joycon2.js/example-p5js/)**
+  - Click to connect. Then, press X/Up button to confirm after connected.
 
 
 ### B. Node.js usage
 See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/main/example/).
 
 
-## APIs Specification
+## APIs Specification👨‍💻
 <details><summary>CLICK ME</summary>
 
-## API List
+### API List
 
 - [Constructor](#Constructor)
 - [Methods](#Methods)
@@ -71,7 +71,7 @@ new JoyCon2()
 
 Parameters: None  
   
-Returns: joycon2.js instance  
+Return: joycon2.js instance  
 
 ### Methods
 #### connect
@@ -86,7 +86,7 @@ Type: `async`
   
 Parameters: None  
   
-Returns: `Promise<void>`  
+Return: `Promise<void>`  
 
 Notes:  
 Connection success or failure can be captured using then/catch methods.
@@ -113,12 +113,12 @@ Type: `sync`
   
 Parameters: None  
   
-Returns: None  
+Return: None  
  
 
 ### Properties
 Overview:  
-You can access current key/button status.
+You can access current input status.
 ```javascript
 // Consider `jc2` to be connected joycon2.js instance
 if (jc2.buttonUp || jc2.buttonX) {
@@ -183,16 +183,16 @@ if (jc2.buttonUp || jc2.buttonX) {
 </details>
 
 
-## Notes
+## Notes📋
 ### Environment 
 Due to the dependency to `WebBluetooth`, this library works with the following environment.  
 - OS: Windows, macOS, Android. **iOS/iPadOS does not support**(Please use [Bluefy](https://apps.apple.com/jp/app/bluefy-web-ble-browser/id1492822055) app instead). 
 - Browser: Latest version of Google Chrome is highly recommended.  
 
-You can check & use immediately via **[p5.js demo](https://tetunori.github.io/joycon2.js/sample/)**.
+You can check & use immediately via **[p5.js demo](https://tetunori.github.io/joycon2.js/example-p5js/)**.
 
 
-## Maintenance
+## Maintenance🛠️
 ### Development Environment
 - TypeScript
 - Vite
