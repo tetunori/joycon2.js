@@ -6,12 +6,8 @@
 
   function findConstructor() {
     const names = [
-      'JoyCon2', // common
-      'Joycon2',
-      'joycon2',
-      'BleLibTemplate',
-      'Joycon',
-      'JoyCon',
+      'Joycon2', // common
+      'JoyCon2',
     ];
 
     for (const name of names) {
@@ -20,7 +16,7 @@
       if (typeof val === 'function') return val;
       if (typeof val === 'object') {
         // try common property shapes inside a bundle object
-        const props = ['Joycon2', 'JoyCon2', 'joycon2', 'joycon', 'default', 'Joycon'];
+        const props = ['Joycon2', 'JoyCon2'];
         for (const p of props) {
           if (typeof (val as any)[p] === 'function') return (val as any)[p];
         }
