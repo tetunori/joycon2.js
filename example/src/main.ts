@@ -1,9 +1,5 @@
 import { JoyCon2 } from "../../dist/joycon2.js";
 
-// Note: type definitions for JoyCon2 data live in the library. The example UI
-// no longer declares local interfaces and instead treats incoming data
-// generically for display purposes.
-
 const jc2 = new JoyCon2();
 
 const bleButton = document.getElementById('ble-connect') as HTMLButtonElement | null;

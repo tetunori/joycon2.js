@@ -143,21 +143,21 @@ export class JoyCon2Device extends EventTarget {
                 optionalServices: [SERVICE_UUID],
             });
             this.device = device;
-            this.server = await device.gatt?.connect() ?? null;
+            this.server = (await device.gatt?.connect()) ?? null;
             if (!this.server)
-                throw new Error('GATT server not available');
+                throw new Error("GATT server not available");
             const service = await this.server.getPrimaryService(SERVICE_UUID);
             this.characteristic = await service.getCharacteristic(CHARACTERISTICS_UUID);
             await this.characteristic.startNotifications();
-            this.characteristic.addEventListener('characteristicvaluechanged', (ev) => {
+            this.characteristic.addEventListener("characteristicvaluechanged", (ev) => {
                 const char = ev.target;
                 const dv = char.value;
                 this.handleData(dv);
             });
-            this.dispatchEvent(new CustomEvent('connected'));
+            this.dispatchEvent(new CustomEvent("connected"));
         }
         catch (err) {
-            this.dispatchEvent(new CustomEvent('error', { detail: err }));
+            this.dispatchEvent(new CustomEvent("error", { detail: err }));
             throw err;
         }
     }
@@ -168,36 +168,36 @@ export class JoyCon2Device extends EventTarget {
         this.device = null;
         this.server = null;
         this.characteristic = null;
-        this.dispatchEvent(new CustomEvent('disconnected'));
+        this.dispatchEvent(new CustomEvent("disconnected"));
     }
     onUpdate(cb) {
-        this.addEventListener('update', () => cb(this.data));
+        this.addEventListener("update", () => cb(this.data));
     }
     handleData(dv) {
         this.data.rawData = new Uint8Array(dv.buffer);
         this.data.simpleParsed = {
             packetId: dv.getUint32(0x00, true),
             buttons: dv.getUint32(0x04, true),
-            leftStick: readUint24LE(dv, 0x0A),
-            rightStick: readUint24LE(dv, 0x0D),
+            leftStick: readUint24LE(dv, 0x0a),
+            rightStick: readUint24LE(dv, 0x0d),
             mouseX: dv.getInt16(0x10, true),
             mouseY: dv.getInt16(0x12, true),
             mouseUnknown: dv.getInt16(0x14, true),
             mouseDistance: dv.getInt16(0x16, true),
             magX: dv.getInt16(0x18, true),
-            magY: dv.getInt16(0x1A, true),
-            magZ: dv.getInt16(0x1C, true),
-            batteryVoltage: dv.getUint16(0x1F, true),
+            magY: dv.getInt16(0x1a, true),
+            magZ: dv.getInt16(0x1c, true),
+            batteryVoltage: dv.getUint16(0x1f, true),
             batteryCurrent: dv.getInt16(0x28, true),
-            temperature: dv.getInt16(0x2E, true),
+            temperature: dv.getInt16(0x2e, true),
             accelX: dv.getInt16(0x30, true),
             accelY: dv.getInt16(0x32, true),
             accelZ: dv.getInt16(0x34, true),
             gyroX: dv.getInt16(0x36, true),
             gyroY: dv.getInt16(0x38, true),
-            gyroZ: dv.getInt16(0x3A, true),
-            triggerL: dv.getUint8(0x3C),
-            triggerR: dv.getUint8(0x3D),
+            gyroZ: dv.getInt16(0x3a, true),
+            triggerL: dv.getUint8(0x3c),
+            triggerR: dv.getUint8(0x3d),
         };
         // detailed parsed
         this.data.packetId = this.data.simpleParsed.packetId;
@@ -248,7 +248,7 @@ export class JoyCon2Device extends EventTarget {
         this.data.triggerR = this.data.simpleParsed.triggerR;
         [this.data.rightStickX, this.data.rightStickY] = getStick(this.data.rightStickX, this.data.rightStickY);
         [this.data.leftStickX, this.data.leftStickY] = getStick(this.data.leftStickX, this.data.leftStickY);
-        this.dispatchEvent(new CustomEvent('update', { detail: this.data }));
+        this.dispatchEvent(new CustomEvent("update", { detail: this.data }));
     }
 }
 // default export requested by the user: Joycon2 class which wraps JoyCon2Device
@@ -257,10 +257,10 @@ export class JoyCon2 extends EventTarget {
         super();
         this.dev = new JoyCon2Device();
         // re-dispatch device events
-        this.dev.addEventListener('update', (e) => this.dispatchEvent(new CustomEvent('update', { detail: e.detail })));
-        this.dev.addEventListener('connected', (e) => this.dispatchEvent(new CustomEvent('connected')));
-        this.dev.addEventListener('disconnected', (e) => this.dispatchEvent(new CustomEvent('disconnected')));
-        this.dev.addEventListener('error', (e) => this.dispatchEvent(new CustomEvent('error', { detail: e.detail })));
+        this.dev.addEventListener("update", (e) => this.dispatchEvent(new CustomEvent("update", { detail: e.detail })));
+        this.dev.addEventListener("connected", (e) => this.dispatchEvent(new CustomEvent("connected")));
+        this.dev.addEventListener("disconnected", (e) => this.dispatchEvent(new CustomEvent("disconnected")));
+        this.dev.addEventListener("error", (e) => this.dispatchEvent(new CustomEvent("error", { detail: e.detail })));
     }
     async connect() {
         return this.dev.connect();
@@ -286,7 +286,7 @@ export class JoyCon2 extends EventTarget {
         return !!(this.dev && this.dev.data && this.dev.data.buttonRight);
     }
     onUpdate(cb) {
-        this.addEventListener('update', () => cb(this.gJoyCon2Data));
+        this.addEventListener("update", () => cb(this.gJoyCon2Data));
     }
 }
 // no default export: package exposes named exports only (Joycon2, JoyCon2Device, etc.)
@@ -294,7 +294,7 @@ export class JoyCon2 extends EventTarget {
 try {
     window.JoyCon2 = JoyCon2;
     window.Joycon2 = JoyCon2;
-    console.log('joycon2: JoyCon2 constructor installed on window');
+    console.log("joycon2: JoyCon2 constructor installed on window");
 }
 catch (e) {
     // Nodeなどwindowが無い環境ではスルー

@@ -13,7 +13,7 @@ declare interface BluetoothDevice {
 
 declare interface BluetoothRemoteGATTCharacteristic {
   startNotifications(): Promise<void>;
-  addEventListener(event: 'characteristicvaluechanged', listener: (ev: any) => void): void;
+  addEventListener(event: "characteristicvaluechanged", listener: (ev: any) => void): void;
 }
 
 declare interface Navigator {
