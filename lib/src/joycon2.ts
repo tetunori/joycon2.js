@@ -412,7 +412,7 @@ export class JoyCon2 extends EventTarget {
 try {
   (window as any).JoyCon2 = JoyCon2;
   (window as any).Joycon2 = JoyCon2;
-  console.log("joycon2: JoyCon2 constructor installed on window");
+  // console.log("joycon2: JoyCon2 constructor installed on window");
 } catch (e) {
   // Nodeなどwindowが無い環境ではスルー
 }

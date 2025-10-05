@@ -75,7 +75,7 @@ function o(e, t) {
   const a = e.getUint8(t), s = e.getUint8(t + 1);
   return e.getUint8(t + 2) << 16 | s << 8 | a;
 }
-const p = 2e3, f = 1e3, P = 3e3, v = 2e3, y = 1e3, S = 3e3;
+const p = 2e3, f = 1e3, P = 3e3, v = 2e3, S = 1e3, k = 3e3;
 function h(e, t, a, s) {
   if (e > t) {
     const i = (e - t) / (s - t);
@@ -91,7 +91,7 @@ function u(e, t, a) {
 function c(e) {
   return Math.round(e * 100) / 100;
 }
-function k(e, t, a = 0.15) {
+function y(e, t, a = 0.15) {
   const s = Math.sqrt(e * e + t * t);
   if (s < a) return [0, 0];
   const i = (s - a) / (1 - a);
@@ -99,8 +99,8 @@ function k(e, t, a = 0.15) {
   return n = u(c(n), -1, 1), r = u(c(r), -1, 1), [n, r];
 }
 function l(e, t) {
-  let a = h(e, p, f, P), s = h(t, v, y, S);
-  return k(a, s, 0.15);
+  let a = h(e, p, f, P), s = h(t, v, S, k);
+  return y(a, s, 0.15);
 }
 class w extends EventTarget {
   constructor() {
@@ -213,7 +213,7 @@ class m extends EventTarget {
   }
 }
 try {
-  window.JoyCon2 = m, window.Joycon2 = m, console.log("joycon2: JoyCon2 constructor installed on window");
+  window.JoyCon2 = m, window.Joycon2 = m;
 } catch {
 }
 export {
