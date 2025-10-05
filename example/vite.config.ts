@@ -1,18 +1,15 @@
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from "vite";
 import path from "path";
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
-  base: "/joycon2.js/",
-  build: {
-    outDir: 'dist',
-    sourcemap: true
-  },
+  // GitHub Pages のリポジトリ名に合わせる
+  base: "/joycon2.js/example/dist/",
   resolve: {
     alias: {
       "@joycon2": path.resolve(__dirname, "../dist/joycon2.js"),
     },
   },
-
+  build: {
+    outDir: "dist", // デフォルトだが念のため
+  },
 });
