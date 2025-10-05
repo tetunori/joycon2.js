@@ -239,5 +239,5 @@ Tetsunori Nakayama
 
 ## Warning🚨
 
-- This library is published UNOFFICIALLY, is nothing to do with the official activities and also gives any guarantees for any usage.  
+- This library is published UNOFFICIALLY, is nothing to do with the official activities and also does NOT give any guarantees for any usage.  
 - "Joy-Con 2" is a registered trademark of Nintendo Co., Ltd.
