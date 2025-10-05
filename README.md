@@ -5,7 +5,7 @@ Version 0.7.0
 
 ## Description🖊️
 
-A monorepo containing a JavaScript library for controlling JoyCon2 using WebBluetooth, along with samples using Vite-based SPA WebApp and p5.js.
+A monorepo containing an **UNOFFICIAL** JavaScript library for controlling `Joy-Con 2` using WebBluetooth, along with samples using Vite-based SPA WebApp and p5.js.
 
 ## Samples
 
@@ -114,3 +114,8 @@ Tetsunori Nakayama
 
 - [joycon2cpp](https://github.com/TheFrano/joycon2cpp) by [Frano](https://github.com/TheFrano). MIT License
 - [p5.js](https://github.com/processing/p5.js) by [Processing Foundation](https://github.com/processing). GNU Lesser General Public License v2.1.
+
+## Warning⚠️
+
+- This library is published UNOFFICIALLY, is nothing to do with the official activities and also gives any guarantees for any usage.  
+- "Joy-Con 2" is a registered trademark of Nintendo Co., Ltd.
