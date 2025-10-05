@@ -41,9 +41,9 @@ function mouseClicked() {
 
 Then, you can access full functions after connected.
 ```javascript
-  if (jc2.buttonUp || jc2.buttonX) {
-    // some button procedures...
-  }
+if (jc2.buttonUp || jc2.buttonX) {
+  // some button procedures...
+}
 ```
 - **[OpenProcessing Sample: Turn Light On](https://openprocessing.org/sketch/1716380)**
 - **[p5.js demo](https://tetunori.github.io/joycon2.js/sample/)**
@@ -56,11 +56,128 @@ See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/ma
 
 ## APIs Specification
 <details><summary>CLICK ME</summary>
+
+## API List
+
+- [Constructor](#Constructor)
+- [Methods](#Methods)
+- [Properties](#Properties)
+
+### Constructor
+```javascript
+new JoyCon2()
+```
+
+Parameters: None  
+  
+Returns: joycon2.js instance  
+
+### Methods
+#### connect
+```javascript
+connect()
+```
+
+Overview:  
+Connect with Joy-Con 2.
+
+Type: `async`  
+  
+Parameters: None  
+  
+Returns: `Promise<void>`  
+
+Notes:  
+Connection success or failure can be captured using then/catch methods.
+```javascript
+// Consider `jc2` to be joycon2.js instance
+jc2.connect()
+  .then(() => {
+    console.log("✅ JoyCon2 Connected");
+  })
+  .catch((err) => {
+    console.error("❌ JoyCon2 Connection failed:", err);
+  });
+```
+
+#### disconnect
+```javascript
+disconnect()
+```
+
+Overview:  
+Disconnect from connected Joy-Con 2.
+
+Type: `sync`  
+  
+Parameters: None  
+  
+Returns: None  
+ 
+
+### Properties
+Overview:  
+You can access current key/button status.
+```javascript
+// Consider `jc2` to be connected joycon2.js instance
+if (jc2.buttonUp || jc2.buttonX) {
+  // some button procedures...
+}
+```
+
+| Property         | Type         | Description                                  |
+| ---------------- | ------------ | -------------------------------------------- |
+| `packetId`       | `number`     | Packet identifier                            |
+| `buttonL`        | `boolean`    | L button pressed                             |
+| `buttonR`        | `boolean`    | R button pressed                             |
+| `buttonMinus`    | `boolean`    | Minus (-) button pressed                     |
+| `buttonPlus`     | `boolean`    | Plus (+) button pressed                      |
+| `buttonLStick`   | `boolean`    | Left stick button pressed                    |
+| `buttonRStick`   | `boolean`    | Right stick button pressed                   |
+| `buttonA`        | `boolean`    | A button pressed                             |
+| `buttonB`        | `boolean`    | B button pressed                             |
+| `buttonC`        | `boolean`    | C button pressed                             |
+| `buttonX`        | `boolean`    | X button pressed                             |
+| `buttonY`        | `boolean`    | Y button pressed                             |
+| `buttonUp`       | `boolean`    | D-Pad Up pressed                             |
+| `buttonDown`     | `boolean`    | D-Pad Down pressed                           |
+| `buttonLeft`     | `boolean`    | D-Pad Left pressed                           |
+| `buttonRight`    | `boolean`    | D-Pad Right pressed                          |
+| `buttonCapture`  | `boolean`    | Capture button pressed                       |
+| `buttonHome`     | `boolean`    | Home button pressed                          |
+| `buttonZR`       | `boolean`    | ZR button pressed                            |
+| `buttonZL`       | `boolean`    | ZL button pressed                            |
+| `buttonSR_R`     | `boolean`    | SR button (Right) pressed                    |
+| `buttonSL_R`     | `boolean`    | SL button (Right) pressed                    |
+| `buttonSR_L`     | `boolean`    | SR button (Left) pressed                     |
+| `buttonSL_L`     | `boolean`    | SL button (Left) pressed                     |
+| `leftStickX`     | `number`     | Left stick X axis (-1.0 to 1.0, normalized)  |
+| `leftStickY`     | `number`     | Left stick Y axis (-1.0 to 1.0, normalized)  |
+| `rightStickX`    | `number`     | Right stick X axis (-1.0 to 1.0, normalized) |
+| `rightStickY`    | `number`     | Right stick Y axis (-1.0 to 1.0, normalized) |
+| `mouseX`         | `number`     | Mouse movement X                             |
+| `mouseY`         | `number`     | Mouse movement Y                             |
+| `mouseUnknown`   | `number`     | Unknown mouse-related value                  |
+| `mouseDistance`  | `number`     | Mouse movement distance                      |
+| `magX`           | `number`     | Magnetometer X axis                          |
+| `magY`           | `number`     | Magnetometer Y axis                          |
+| `magZ`           | `number`     | Magnetometer Z axis                          |
+| `batteryVoltage` | `number`     | Battery voltage                              |
+| `batteryCurrent` | `number`     | Battery current (A)                          |
+| `temperature`    | `number`     | Temperature in Celsius                       |
+| `accelX`         | `number`     | Accelerometer X axis (g)                     |
+| `accelY`         | `number`     | Accelerometer Y axis (g)                     |
+| `accelZ`         | `number`     | Accelerometer Z axis (g)                     |
+| `gyroX`          | `number`     | Gyroscope X axis (deg/s)                     |
+| `gyroY`          | `number`     | Gyroscope Y axis (deg/s)                     |
+| `gyroZ`          | `number`     | Gyroscope Z axis (deg/s)                     |
+| `triggerL`       | `number`     | Left trigger value (0-255)                   |
+| `triggerR`       | `number`     | Right trigger value (0-255)                  |
+| `simpleParsed`   | `object`     | Simple parsed data(For Debug)                |
+| `rawData`        | `Uint8Array` | Raw BLE data bytes(For Debug)                |
+
 <p>
 
-- `lib`: The core library (TypeScript, Vite, builds to `dist`)
-- `example`: Sample SPA demonstrating library usage (Vite, TypeScript)
-- `example-p5js`: Simple p5.js sample demonstrating library usage
 </p>
 </details>
 
@@ -82,6 +199,11 @@ You can check & use immediately via **[p5.js demo](https://tetunori.github.io/jo
 - Prettier
 - GitHub Actions
 - npm workspaces
+
+### Directories
+- `lib`: The core library (TypeScript, Vite, builds to `dist`)
+- `example`: Sample SPA demonstrating library usage (Vite, TypeScript)
+- `example-p5js`: Simple p5.js sample demonstrating library usage
 
 ### Build
 
