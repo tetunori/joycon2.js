@@ -57,6 +57,7 @@ See the [SPA WebApp sample codes](https://github.com/tetunori/joycon2.js/tree/ma
 
 ## APIs Specification👨‍💻
 <details><summary>CLICK ME</summary>
+<p>
 
 ### API List
 
@@ -156,28 +157,26 @@ if (jc2.buttonUp || jc2.buttonX) {
 | `leftStickY`     | `number`     | Left stick Y axis (-1.0 to 1.0, normalized)  |
 | `rightStickX`    | `number`     | Right stick X axis (-1.0 to 1.0, normalized) |
 | `rightStickY`    | `number`     | Right stick Y axis (-1.0 to 1.0, normalized) |
-| `mouseX`         | `number`     | Mouse movement X                             |
-| `mouseY`         | `number`     | Mouse movement Y                             |
-| `mouseUnknown`   | `number`     | Unknown mouse-related value                  |
-| `mouseDistance`  | `number`     | Mouse movement distance                      |
-| `magX`           | `number`     | Magnetometer X axis                          |
-| `magY`           | `number`     | Magnetometer Y axis                          |
-| `magZ`           | `number`     | Magnetometer Z axis                          |
+| ~~`mouseX`~~         | `number`     | ❌Mouse movement X                             |
+| ~~`mouseY`~~         | `number`     | ❌Mouse movement Y                             |
+| ~~`mouseUnknown`~~   | `number`     | ❌Unknown mouse-related value                  |
+| ~~`mouseDistance`~~  | `number`     | ❌Mouse movement distance                      |
+| ~~`magX`~~           | `number`     | ❌Magnetometer X axis                          |
+| ~~`magY`~~           | `number`     | ❌Magnetometer Y axis                          |
+| ~~`magZ`~~           | `number`     | ❌Magnetometer Z axis                          |
 | `batteryVoltage` | `number`     | Battery voltage                              |
 | `batteryCurrent` | `number`     | Battery current (A)                          |
 | `temperature`    | `number`     | Temperature in Celsius                       |
-| `accelX`         | `number`     | Accelerometer X axis (g)                     |
-| `accelY`         | `number`     | Accelerometer Y axis (g)                     |
-| `accelZ`         | `number`     | Accelerometer Z axis (g)                     |
-| `gyroX`          | `number`     | Gyroscope X axis (deg/s)                     |
-| `gyroY`          | `number`     | Gyroscope Y axis (deg/s)                     |
-| `gyroZ`          | `number`     | Gyroscope Z axis (deg/s)                     |
-| `triggerL`       | `number`     | Left trigger value (0-255)                   |
-| `triggerR`       | `number`     | Right trigger value (0-255)                  |
+| ~~`accelX`~~         | `number`     | ❌Accelerometer X axis (g)                     |
+| ~~`accelY`~~         | `number`     | ❌Accelerometer Y axis (g)                     |
+| ~~`accelZ`~~         | `number`     | ❌Accelerometer Z axis (g)                     |
+| ~~`gyroX`~~          | `number`     | ❌Gyroscope X axis (deg/s)                     |
+| ~~`gyroY`~~          | `number`     | ❌Gyroscope Y axis (deg/s)                     |
+| ~~`gyroZ`~~          | `number`     | ❌Gyroscope Z axis (deg/s)                     |
+| ~~`triggerL`~~       | `number`     | ❌Left trigger value (0-255)                   |
+| ~~`triggerR`~~       | `number`     | ❌Right trigger value (0-255)                  |
 | `simpleParsed`   | `object`     | Simple parsed data(For Debug)                |
 | `rawData`        | `Uint8Array` | Raw BLE data bytes(For Debug)                |
-
-<p>
 
 </p>
 </details>
