@@ -1,4 +1,5 @@
-import { JoyCon2 } from "../../dist/joycon2.js";
+// import { JoyCon2 } from "/joycon2.js/dist/joycon2.js";
+import { JoyCon2 } from "@joycon2";
 
 const jc2 = new JoyCon2();
 
