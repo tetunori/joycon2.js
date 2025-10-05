@@ -1,0 +1,15 @@
+// bridge.ts
+// --- joycon2.ts を取り込む ---
+import { JoyCon2 } from './joycon2';
+
+// --- window へ登録（UMD用）---
+try {
+  (window as any).JoyCon2 = JoyCon2;
+  (window as any).Joycon2 = JoyCon2;
+  console.log('joycon2 bridge: JoyCon2 constructor installed');
+} catch (e) {
+  console.warn('joycon2 bridge: failed to install JoyCon2 on window', e);
+}
+
+// --- ESMなどからも使えるよう export ---
+export * from './joycon2';

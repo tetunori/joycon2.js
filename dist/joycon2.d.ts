@@ -85,7 +85,7 @@ export declare class JoyCon2Device extends EventTarget {
     onUpdate(cb: (data: JoyCon2Data) => void): void;
     private handleData;
 }
-export declare class Joycon2 extends EventTarget {
+export declare class JoyCon2 extends EventTarget {
     private dev;
     constructor();
     connect(): Promise<void>;

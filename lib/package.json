@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "vite build --config vite.config.ts && vite build --config vite.bridge.config.ts",
+    "build": "vite build --config vite.config.ts && vite build --config vite.config.ts",
     "build:types": "tsc -p tsconfig.json",
     "build:with-types": "npm run build && npm run build:types && echo 'lib build complete'",
     "lint": "eslint src --ext .ts,.tsx",

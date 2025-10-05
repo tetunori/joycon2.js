@@ -1,4 +1,4 @@
-const jc2 = new JoyCon2();;
+const jc2 = new JoyCon2();
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

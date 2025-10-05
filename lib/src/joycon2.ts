@@ -343,7 +343,7 @@ export class JoyCon2Device extends EventTarget {
 }
 
 // default export requested by the user: Joycon2 class which wraps JoyCon2Device
-export class Joycon2 extends EventTarget {
+export class JoyCon2 extends EventTarget {
   private dev: JoyCon2Device;
   constructor() {
     super();
@@ -391,3 +391,12 @@ export class Joycon2 extends EventTarget {
 }
 
 // no default export: package exposes named exports only (Joycon2, JoyCon2Device, etc.)
+
+// --- UMD向けブリッジ（グローバル登録） ---
+try {
+  (window as any).JoyCon2 = JoyCon2;
+  (window as any).Joycon2 = JoyCon2;
+  console.log('joycon2: JoyCon2 constructor installed on window');
+} catch (e) {
+  // Nodeなどwindowが無い環境ではスルー
+}
